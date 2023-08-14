@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.2.1/dist/maplibre-gl.css" crossorigin="anonymous">
         <script src="https://unpkg.com/maplibre-gl@3.2.1/dist/maplibre-gl.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/pmtiles@2.7.2/dist/index.js"></script>
         <style>
             body {
                 margin: 0;
@@ -20,11 +19,7 @@
         <div id="overlay">
         <script type="text/javascript" src="highroadplus.js"></script>
         <script type="text/javascript">
-            let protocol = new pmtiles.Protocol();
             maplibregl.setRTLTextPlugin('https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.js');
-            maplibregl.addProtocol("pmtiles",protocol.tile);
-
-            let URL = "https://protomaps.dev/~bdon/highroadplus.pmtiles";
 
             const map = new maplibregl.Map({
                 hash: true,
@@ -35,12 +30,14 @@
                     sources: {
                         "protomaps": {
                             type: "vector",
-                            url: "pmtiles://" + URL,
+                            url: "https://cdn-dev.protomaps-dev.workers.dev/highroadplus.json",
                             attribution: 'Protomaps © <a href="https://openstreetmap.org">OpenStreetMap</a>'
                         }
                     },
                     layers: LAYERS
-                }
+                },
+                center:[-71.059415,42.34628],
+                zoom: 15
             });
 
             map.on('mousedown', function (e) {
