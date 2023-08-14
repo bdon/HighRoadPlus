@@ -19,7 +19,24 @@ Alternatively,
 
 5 classes * 2 (casing/no casing) * each level (-2,-1,0,1,2,3,4,5) = 80 layers
 
-External references:
+## Concept
+
+This is the combination of two techniques to massively reduce the # of layers.
+
+* Firstly, each road class is visualized using data-driven styling in a single layer. This needs to work around limitations in the MapLibre styling language, namely that `zoom`-based interpolations must be at the top level of an expression.
+
+* Secondly, casings are drawn using two separate methods. For `layer` values `-1`,`0` and `1` (97% of all values), the traditional `casing` layer is used. For values `<= -2` and `>= 2` (3% of cases) a duplicate geometry is created at tileset creation time, with only the addition of one tag `casing=true`. This layer is then drawn in sorted order with different paint values depending on the `casing` tag.
+
+## Drawbacks
+
+* duplication in tile data (3% of cases), minor impact
+* 2 different ways to draw casings, no impact
+* No data-driven line-dash array or line ends (can be worked around)
+* **Very small visual artifacts** at seams between `butt` line endings
+
+
+
+## External references
 
 * [OSM TagInfo layer= values](https://taginfo.openstreetmap.org/keys/layer#values)
 * Oliver's [Single Highway Layer](https://github.com/wipfli/single-highway-layer)
