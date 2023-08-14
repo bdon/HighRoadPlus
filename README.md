@@ -18,3 +18,9 @@ Each layer visualizes 5 road classes (`highway`,`major_road`,`medium_road`,`mino
 Alternatively,
 
 5 classes * 2 (casing/no casing) * each level (-2,-1,0,1,2,3,4,5) = 80 layers
+
+External references:
+
+* [OSM TagInfo layer= values](https://taginfo.openstreetmap.org/keys/layer#values)
+* Oliver's [Single Highway Layer](https://github.com/wipfli/single-highway-layer)
+* [migurski/HighRoad](https://github.com/migurski/HighRoad)
